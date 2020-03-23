@@ -52,12 +52,12 @@ RSpec.describe TicketsController, type: :controller do
     it "Updates tag counts correctly" do
       post :create, body: build(:payload, tags: ['t1', 't2', 't3', 't4', 't5']).to_json
       post :create, body: build(:payload, tags: ['t3']).to_json
-      expect(Tag.order(:count).last.name).to eq('t3')
+      expect(Tag.max_tag).to eq('t3')
     end
 
     it "Has an empty max tag if first tickets have no tags" do
       post :create, body: build(:payload).to_json
-      expect(Tag.order(:count).last).to eq(nil)
+      expect(Tag.max_tag).to eq('')
     end
 
   end

@@ -6,4 +6,8 @@ class Tag < ApplicationRecord
     self.name&.downcase!
   end
 
+  def self.max_tag
+    Tag.order(:count).last&.name || ''
+  end
+
 end
