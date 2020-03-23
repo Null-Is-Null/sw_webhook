@@ -1,7 +1,14 @@
 class TicketsController < ApplicationController
 
   def create
-    ticket_data = JSON.parse(request.body.read).symbolize_keys
+
+    begin
+      ticket_data = JSON.parse(request.body.read)&.symbolize_keys || {}
+    rescue JSON::ParserError => e
+      errors = {body: "Invalid JSON"}
+      ticket_data = {}
+    end
+
     tag_data = ticket_data.delete(:tags) || []
     @ticket = Ticket.new(**ticket_data)
     @ticket.tags = tag_data.map do |tag| Tag.find_or_create_by(name: tag) end
@@ -10,7 +17,7 @@ class TicketsController < ApplicationController
       deliver_webhook
       head :ok
     else
-      errors = @ticket.errors.messages
+      errors ||= @ticket.errors.messages
       render json: errors.to_json, status: :unprocessable_entity
     end
   end

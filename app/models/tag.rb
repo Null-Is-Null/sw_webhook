@@ -6,7 +6,4 @@ class Tag < ApplicationRecord
     self.name&.downcase!
   end
 
-  before_save do
-    self.increment(:count)
-  end
 end
