@@ -42,12 +42,22 @@ RSpec.describe TicketsController, type: :controller do
         post :create, body: {}.to_json
         expect(response.status).to eq(422)
       end
+
+      it "Rejects a non-JSON payload" do
+        post :create, body: "not valid JSON"
+        expect(response.status).to eq(422)
+      end
     end
 
     it "Updates tag counts correctly" do
       post :create, body: build(:payload, tags: ['t1', 't2', 't3', 't4', 't5']).to_json
       post :create, body: build(:payload, tags: ['t3']).to_json
       expect(Tag.order(:count).last.name).to eq('t3')
+    end
+
+    it "Has an empty max tag if first tickets have no tags" do
+      post :create, body: build(:payload).to_json
+      expect(Tag.order(:count).last).to eq(nil)
     end
 
   end
