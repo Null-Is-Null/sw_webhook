@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_03_23_164601) do
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: ""
     t.integer "count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_164601) do
 
   create_table "tickets", force: :cascade do |t|
     t.integer "user_id"
-    t.string "title"
+    t.string "title", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
