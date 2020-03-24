@@ -35,4 +35,14 @@ RSpec.describe Ticket, type: :model do
     ticket = build(:ticket, tags: [Tag.new])
     expect(ticket).to be_invalid
   end
+
+  it "is invalid with duplicate tags" do
+    ticket = build(:ticket, tags: [build(:tag), build(:tag)])
+    expect(ticket).to be_invalid
+  end
+
+  it "is invalid with duplicate tags with different cases" do
+    ticket = build(:ticket, tags: [build(:tag), build(:tag, name: "TEST")])
+    expect(ticket).to be_invalid
+  end
 end
