@@ -1,7 +1,10 @@
 class TicketsController < ApplicationController
 
-  def create
+  def index
+    head 404
+  end
 
+  def create
     begin
       ticket_data = JSON.parse(request.body.read)&.symbolize_keys || {}
     rescue JSON::ParserError => e
