@@ -14,7 +14,7 @@ class TicketsController < ApplicationController
 
     tag_data = ticket_data.delete(:tags) || []
     @ticket = Ticket.new(**ticket_data)
-    @ticket.tags = tag_data.map do |tag| Tag.find_or_create_by(name: tag) end
+    @ticket.tags = tag_data.map do |tag| Tag.find_or_create_by(name: tag.downcase) end
 
     if @ticket.save
       deliver_webhook
