@@ -18,7 +18,7 @@ This project consists of an API route available at `/tickets` that accepts a JSO
 * Upon submission of a valid request, a JSON payload of the following format is sent to the configured webhook url:
 
 ```json
-{ max_tag: "name of most frequently occurring tag" }
+{ "max_tag": "name of most frequently occurring tag" }
 ```
 
 ### Ruby version
