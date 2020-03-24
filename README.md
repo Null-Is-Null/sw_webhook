@@ -36,7 +36,7 @@ Execute `bundle exec rake db:migrate` to create the database and all application
 
 ### Testing
 
-Execute 'bundle exec rake spec' to run the test suite.
+Execute `bundle exec rake spec` to run the test suite.
 
 ### Running the application
 
