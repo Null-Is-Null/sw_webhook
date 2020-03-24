@@ -36,7 +36,7 @@ Execute `bundle exec rake db:migrate` to create the database and all application
 
 ### Testing
 
-Execute `bundle exec rake spec` to run the test suite.
+Execute `bundle exec rake spec` to run the test suite. You can also perform manual tests by starting the application and executing `curl -v -d @payload.json http://localhost:3000/tickets` to send the contents of the payload.json file to the endpoint. The `-v` flag should print headers and the response code. For testing the message sent out of the application, configure your environment to use the endpoint provided to you by https://webhook.site/.
 
 ### Running the application
 
