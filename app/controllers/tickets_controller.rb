@@ -12,6 +12,8 @@ class TicketsController < ApplicationController
       ticket_data = {}
     end
 
+    ticket_data.slice!(:user_id, :title, :tags)
+
     tag_data = ticket_data.delete(:tags) || []
     @ticket = Ticket.new(**ticket_data)
     @ticket.tags = tag_data.map do |tag| Tag.find_or_create_by(name: tag.downcase) end

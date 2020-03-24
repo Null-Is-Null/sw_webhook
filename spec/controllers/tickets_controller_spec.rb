@@ -12,6 +12,11 @@ RSpec.describe TicketsController, type: :controller do
       expect(response.status).to eq(200)
     end
 
+    it "Ignores unused entries" do
+      post :create, body: build(:payload, extraattr: "EXTRA").to_json
+      expect(response.status).to eq(200)
+    end
+
     context "with invalid attributes" do
       it "Rejects payload wih no user_id" do
         post :create, body: build(:payload, user_id: nil).to_json
